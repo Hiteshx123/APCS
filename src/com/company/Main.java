@@ -2,14 +2,13 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.ColorModel;
-import java.math.BigInteger;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Random;
 
 public class Main {
 
     private final String GAME_TITLE = "Curved Breakout";
-    private Rectangle gameBounds;
     private GameScene gameScene;
 
     public static void main(String[] args) {
@@ -43,20 +42,9 @@ public class Main {
                         virtualBounds.union(gc[i].getBounds());
             }
         }
-        gameBounds = virtualBounds;
         return virtualBounds;
     }
 
-    public static class BrickGenerator {
 
-
-        public class Bricks extends Rectangle {
-            
-
-            public Bricks(int x, int y, int width, int height) {
-                super(x, y, width, height);
-            }
-        }
-    }
 
 }

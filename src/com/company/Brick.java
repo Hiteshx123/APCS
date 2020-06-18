@@ -40,27 +40,27 @@ public class Brick {
     public Type getBrickType(){ return brickType;   }
 
     public boolean hitBy(Ball b){
-        //first check if it hits from the bottom or top
+
         if(b.getX() <= (xPos + BRICK_WIDTH) && b.getX() >= xPos){
-            //hit bottom
+
             if(b.getY() <= (yPos + BRICK_HEIGHT) && b.getY() >= (yPos + (BRICK_HEIGHT / 2))){
                 b.setDY(b.getDY() * -1);
                 return true;
             }
-            //hit top
+
             else if(b.getY() >= (yPos - Ball.DIAMETER) && b.getY() < (yPos + (Ball.DIAMETER / 3))){
                 b.setDY(b.getDY() * -1);
                 return true;
             }
         }
-        //determines if it from a side
+
         else if(b.getY() <= (yPos + BRICK_HEIGHT) && b.getY() >= yPos){
             //hit right
             if(b.getX() <= (xPos + BRICK_WIDTH) && b.getX() > (xPos + (BRICK_WIDTH - (Ball.DIAMETER / 2)))){
                 b.setDX(b.getDX() * -1);
                 return true;
             }
-            //hit left
+
             else if(b.getX() >= (xPos - Ball.DIAMETER) && b.getX() < (xPos + (Ball.DIAMETER / 2))){
                 b.setDX(b.getDX() * -1);
                 return true;

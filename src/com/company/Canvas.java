@@ -23,9 +23,7 @@ import javax.swing.Timer;
 
 
 public class Canvas extends JPanel implements ActionListener, MouseMotionListener, MouseListener {
-    /**
-     *
-     */
+
     public static final int HEIGHT = 600;
     public static final int WIDTH = 720;
 
@@ -41,16 +39,7 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
     private Ball ball;
     ArrayList<ArrayList<Brick> > bricks;
 
-    /**
-     * Prepares the screen, centers the paddle and the ball. The ball
-     * will be located in the center of the paddle, and the paddle will
-     * be located on the center of the screen
-     * Sunde
-     * The bricks are displayed in columns across the screen with the
-     * screen being split based on the width of an individual brick.
-     * Each brick is stored in a temporary ArrayList, which is added
-     * to the classes ArrayList which contains all of the bricks.
-     */
+
     public Canvas(){
         super();
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -92,17 +81,13 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
         repaint();
     }
 
-    /**
-     * Checks for any collisions, if the ball hits the upper wall, or the side
-     * walls it changes direction. If the ball goes below the paddle, the position
-     * of the ball gets reset and the player loses a life
-     */
+
     private void checkCollisions() {
         if(player.hitPaddle(ball)){
             ball.setDY(ball.getDY() * -1);
             return;
         }
-        //first check if ball hit any walls
+
         if(ball.getX() >= (WIDTH - Ball.DIAMETER) || ball.getX() <= 0){
             ball.setDX(ball.getDX() * -1);
         }
@@ -113,7 +98,7 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
             ball.setDY(ball.getDY() * -1);
         }
 
-        //next handle collisions between bricks
+
         int brickRowsActive = 0;
         for(ArrayList<Brick> alb : bricks){
             if(alb.size() == horizontalCount){
@@ -131,10 +116,7 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
         }
     }
 
-    /**
-     * Sets the balls position to approximately the center of the screen, and
-     * deducts a point from the user. If necessary, ends the game
-     */
+
     private void resetBall() {
         if(gameOver()){
             time.stop();
@@ -152,12 +134,7 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
         return false;
     }
 
-    /**
-     *  Draws the screen for the game, first sets the screen up (clears it)
-     *  and then it begins by setting the entire screen to be white. Finally
-     *  it draws all of the bricks, the players paddle, and the ball on the
-     *  screen
-     */
+
     @Override public void paintComponent(Graphics g){
         super.paintComponent(g);
         bufferedGraphics.clearRect(0, 0, WIDTH, HEIGHT);
@@ -224,25 +201,23 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
+
 
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
+
 
     }
 }

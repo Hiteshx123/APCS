@@ -31,22 +31,7 @@ public class Paddle {
     public int getLives(){ return lives; }
     public void setLives(int lives){ this.lives = lives; }
 
-    /**
-     * Determines whether a Ball has hit the paddle
-     *
-     * Checks if ball is in range of the paddles x's first. If
-     * it ball.x > paddle.x but less than paddle.x + PADDLE_WIDTH + 15
-     * it is in the horizontal range. 
-     *
-     * Next checks if it is actually hitting the paddle. if ball.y + the diameter
-     * is close to the paddles y position the method returns true. Has a final
-     * condition which gives somewhat of an error buffer to make sure the method
-     * doesn't allow the ball to skip over the threshhold and thus go right through
-     * the paddle
-     *
-     * @param b
-     * @return
-     */
+
     public boolean hitPaddle(Ball b){
         if(b.getX() <= xPos + (PADDLE_WIDTH + 15)){
             if(b.getX() >= xPos - 10){

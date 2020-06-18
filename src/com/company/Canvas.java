@@ -10,9 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -22,7 +19,7 @@ import javax.swing.Timer;
 
 
 
-public class Canvas extends JPanel implements ActionListener, MouseMotionListener, MouseListener {
+public class Canvas extends JPanel implements ActionListener, KeyListener {
 
     public static final int HEIGHT = 600;
     public static final int WIDTH = 720;
@@ -50,18 +47,17 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
         ball = new Ball(((player.getX() + (Paddle.PADDLE_WIDTH / 2)) - (Ball.DIAMETER / 2)),
                 (Paddle.Y_POS - (Ball.DIAMETER + 10)), -5, -5);
 
-        bricks = new ArrayList<ArrayList<Brick> >();
+        bricks = new ArrayList<>();
         horizontalCount = WIDTH / Brick.BRICK_WIDTH;
         for(int i = 0; i < 8; ++i){
             ArrayList<Brick> temp = new ArrayList<Brick>();
             for(int j = 0; j < horizontalCount; ++j){
-                Brick tempBrick = new Brick((j * Brick.BRICK_WIDTH), ((i+2) * Brick.BRICK_HEIGHT), Brick.Type.MEDIUM);
+                Brick tempBrick = new Brick((j * Brick.BRICK_WIDTH), ((i+2) * Brick.BRICK_HEIGHT), Brick.Type.LOW);
                 temp.add(tempBrick);
             }
             bricks.add(temp);
-            addMouseMotionListener(this);
-            addMouseListener(this);
-            //addKeyListener(this);
+            addKeyListener(this);
+            this.setFocusable(true);
             requestFocus();
         }
     }
@@ -69,6 +65,7 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
     @Override public void actionPerformed(ActionEvent e){
         checkCollisions();
         ball.move();
+        playMove();
         for(int i = 0; i < bricks.size(); ++i){
             ArrayList<Brick> al = bricks.get(i);
             for(int j = 0; j < al.size(); ++j){
@@ -79,6 +76,15 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
             }
         }
         repaint();
+    }
+
+    void playMove(){
+        if(left)
+        if(player.getX() - 1 > 0)
+            player.setX(player.getX() - 1 - (Paddle.PADDLE_WIDTH / 2));
+        if(right)
+        if(player.getX() + 1 < this.getWidth())
+            player.setX(player.getX() + 1 + (Paddle.PADDLE_WIDTH / 2));
     }
 
 
@@ -176,18 +182,6 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
         return true;
     }
 
-    @Override public void mouseMoved(MouseEvent e){
-        player.setX(e.getX() - (Paddle.PADDLE_WIDTH / 2));
-    }
-
-    @Override public void mouseDragged(MouseEvent e){}
-
-    @Override public void mouseClicked(MouseEvent e){
-        if(time.isRunning()){
-            return;
-        }
-        time.start();
-    }
 
     public static void main(String[] args){
         JFrame frame = new JFrame();
@@ -199,25 +193,45 @@ public class Canvas extends JPanel implements ActionListener, MouseMotionListene
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    boolean left = false;
+    boolean right = false;
+    boolean space = false;
+
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void keyTyped(KeyEvent e) {
 
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-
-
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                left = true;
+                break;
+            case KeyEvent.VK_RIGHT:
+                right = true;
+                break;
+            case KeyEvent.VK_SPACE:
+                if(!time.isRunning()){
+                    time.start();
+                }
+                break;
+        }
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-
+    public void keyReleased(KeyEvent e) {
+        System.out.println("FUCK YOU");
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                left = false;
+                break;
+            case KeyEvent.VK_RIGHT:
+                right = false;
+                break;
+            case KeyEvent.VK_SPACE:
+                space = false;
+                break;
+        }
     }
 }

@@ -10,9 +10,6 @@ public class Brick {
     private Type    brickType;
 
     enum Type{
-        ULTRA   (6, 700, Color.black),
-        HIGH    (3, 150, Color.RED),
-        MEDIUM  (2, 100, Color.BLUE),
         LOW     (1, 50, Color.GREEN),
         DEAD    (0, 0, Color.WHITE);
         private int life;
@@ -55,7 +52,7 @@ public class Brick {
         }
 
         else if(b.getY() <= (yPos + BRICK_HEIGHT) && b.getY() >= yPos){
-            //hit right
+
             if(b.getX() <= (xPos + BRICK_WIDTH) && b.getX() > (xPos + (BRICK_WIDTH - (Ball.DIAMETER / 2)))){
                 b.setDX(b.getDX() * -1);
                 return true;
@@ -71,14 +68,6 @@ public class Brick {
 
     public void decrementType(){
         switch(brickType.life){
-            case 6:
-            case 5:
-            case 4:
-                --brickType.life;
-                break;
-            case 3:
-                brickType = Type.MEDIUM;
-                break;
             case 2:
                 brickType = Type.LOW;
                 break;

@@ -221,7 +221,6 @@ public class Canvas extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("FUCK YOU");
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
                 left = false;

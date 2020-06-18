@@ -21,29 +21,18 @@ public class Main {
     }
 
     public void buildScene(){
-        gameScene = new GameScene(GAME_TITLE);
-        gameScene.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameScene.setBounds(getGameBounds());
-        gameScene.setVisible(true);
+        gameScene = new GameScene();
+        JFrame frame = new JFrame(GAME_TITLE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(new Rectangle(1000, 600));
+        frame.setResizable(false);
+        frame.add(gameScene);
+        frame.setVisible(true);
+        frame.setFocusable(true);
+        frame.repaint();
+
     }
 
-    public Rectangle getGameBounds() {
-        Rectangle virtualBounds = new Rectangle();
-        GraphicsEnvironment ge = GraphicsEnvironment.
-                getLocalGraphicsEnvironment();
-        GraphicsDevice[] gs =
-                ge.getScreenDevices();
-        for (int j = 0; j < gs.length; j++) {
-            GraphicsDevice gd = gs[j];
-            GraphicsConfiguration[] gc =
-                    gd.getConfigurations();
-            for (int i=0; i < gc.length; i++) {
-                virtualBounds =
-                        virtualBounds.union(gc[i].getBounds());
-            }
-        }
-        return virtualBounds;
-    }
 
 
 

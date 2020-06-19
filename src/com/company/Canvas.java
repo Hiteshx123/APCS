@@ -111,7 +111,12 @@ public class Canvas extends JPanel implements ActionListener, KeyListener {
                 ++brickRowsActive;
             }
         }
-
+        int ii = 0;
+        if(brickRowsActive == 0){
+            ii = 0;
+        } else {
+            ii = brickRowsActive - 1;
+        }
         for(int i = (brickRowsActive==0) ? 0 : (brickRowsActive - 1); i < bricks.size(); ++i){
             for(Brick b : bricks.get(i)){
                 if(b.hitBy(ball)){

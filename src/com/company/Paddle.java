@@ -52,13 +52,4 @@ public class Paddle {
         g.drawRect(xPos, Y_POS, PADDLE_WIDTH, PADDLE_HEIGHT);
     }
 
-    public static void main(String[] args){
-        Ball b = new Ball(110, (Y_POS - (Ball.DIAMETER - 5)), 5, 5);
-        Paddle p = new Paddle(110);
-        for(int i = 1; i <= PADDLE_WIDTH; ++i){
-            b.setX(b.getX() + 1);
-            System.out.println(p.hitPaddle(b));
-        }
-        System.out.println(p.hitPaddle(b));
-    }
 }
